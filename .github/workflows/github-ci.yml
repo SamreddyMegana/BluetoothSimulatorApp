@@ -1,0 +1,62 @@
+# .github/workflows/ci.yml
+name: CI/CD Pipeline for React Native App
+
+on:
+  push:
+    branches:
+      - main  # Change to your default branch name if it's not 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install iOS dependencies (MacOS only)
+        if: runner.os == 'macOS'
+        run: |
+          cd ios
+          pod install
+          cd ..
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build Android app
+        run: |
+          npx react-native run-android --variant=release
+
+      - name: Build iOS app (MacOS only)
+        if: runner.os == 'macOS'
+        run: |
+          xcodebuild -workspace ios/MyApp.xcworkspace -scheme MyApp -sdk iphonesimulator -derivedDataPath ios/build
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: build
+    if: failure()
+
+    steps:
+      - name: Send notification on failure
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.example.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: CI/CD Pipeline Failed
+          body: |
+            The CI/CD pipeline failed for commit ${{ github.sha }}.
+            Please check the logs for more details: ${{ github.run_url }}
+          to: user@example.com
+          from: github-actions@example.com
