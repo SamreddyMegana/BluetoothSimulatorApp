@@ -21,7 +21,7 @@ Before setting up the project, ensure you have the following installed on your m
 ## Step 1:  **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/react-native-bluetooth-simulator.git
+   git clone https://github.com/Samreddy9/BluetoothSimulatorApp/tree/patch-1
    cd react-native-bluetooth-simulator
    ```
 ## Step 3: Install Dependencies
