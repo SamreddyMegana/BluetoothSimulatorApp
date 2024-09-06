@@ -4,7 +4,7 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 # React Native Bluetooth Device Simulator
 
-This project is a simple React Native mobile app that simulates connecting to a Bluetooth device and reading data. The app includes offline data storage and synchronization with Firebase Cloud Firestore when connectivity is restored.
+This project is a simple React Native mobile app that simulates connecting to a Bluetooth device and reading data. The app includes offline data storage and synchronization with Firebase Cloud Firestore when connectivity is restored. 
 
 ## Prerequisites
 
