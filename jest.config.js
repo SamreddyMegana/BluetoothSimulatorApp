@@ -13,6 +13,7 @@ module.exports = {
     '^@react-native-async-storage/async-storage$': '<rootDir>/_mocks_/@react-native-async-storage/async-storage.js',
     '^react-native-ble-plx$': '<rootDir>/_mocks_/react-native-ble-plx.js',
     '^@react-native-community/netinfo$': '<rootDir>/_mocks_/@react-native-community/netinfo.js',
+    '^@react-native-firebase/firestore$': '<rootDir>/_mocks_/@react-native-firebase/firestore.js',
   },
   moduleDirectories: ['node_modules', 'src'], 
 };
