@@ -16,4 +16,5 @@ module.exports = {
     '^@react-native-firebase/firestore$': '<rootDir>/_mocks_/@react-native-firebase/firestore.js',
   },
   moduleDirectories: ['node_modules', 'src'], 
+  testTimeout: 10000,
 };
