@@ -23,7 +23,7 @@ jest.mock('@react-native-community/netinfo', () => ({
 }));
 
 // Mock CloudSyncManager
-jest.mock('../Container/CloudSyncManager', () => ({
+jest.mock('../App/Container/CloudSyncManager', () => ({
   syncDataToCloud: jest.fn(() => Promise.resolve()),
 }));
 
