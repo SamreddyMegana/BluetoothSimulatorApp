@@ -10,7 +10,7 @@ module.exports = {
   },
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
   moduleNameMapper: {
-    '^@react-native-async-storage/async-storage$': 'C:\Users\samre\BluetoothSimulatorApp\_mocks_\@react-native-async-storage\async-storage.js',
+    '^@react-native-async-storage/async-storage$': '<rootDir>/_mocks_/@react-native-async-storage/async-storage.js',
   },
   moduleDirectories: ['node_modules', 'src'], 
 };
