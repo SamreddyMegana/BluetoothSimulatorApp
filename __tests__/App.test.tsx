@@ -1,28 +1,51 @@
-// __tests__/App.test.js
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import App from '../App/App';
-import BluetoothManager from "../_mocks_/BlutoothManager"; // This will automatically use the mock
+import bluetoothManager from '../App/Container/BluetooothManager';
+import NetInfo from '@react-native-community/netinfo';
+import { syncDataToCloud } from '../App/Container/CloudSyncManager';
 
-test('App reads and displays Bluetooth data', async () => {
+// Mock BluetoothManager
+jest.mock('../Container/BluetoothManager', () => ({
+  requestPermissions: jest.fn(() => Promise.resolve(true)),
+  scanForDevices: jest.fn(() => Promise.resolve({ name: 'MockDevice' })),
+  connectToDevice: jest.fn(() => Promise.resolve()),
+  readData: jest.fn(() => Promise.resolve('MockedData')),
+  disconnect: jest.fn(),
+}));
+
+// Mock NetInfo
+jest.mock('@react-native-community/netinfo', () => ({
+  addEventListener: jest.fn((callback) => {
+    callback({ isConnected: true, isInternetReachable: true });
+    return () => {};
+  }),
+}));
+
+// Mock CloudSyncManager
+jest.mock('../Container/CloudSyncManager', () => ({
+  syncDataToCloud: jest.fn(() => Promise.resolve()),
+}));
+
+test('App connects to Bluetooth, reads data, and displays it', async () => {
   const { getByText, getByRole } = render(<App />);
 
-  // Simulate the user scanning for devices
-  const scanButton = getByRole('button', { name: 'Scan for Bluetooth Devices' });
+  // Simulate scanning for Bluetooth devices
+  const scanButton = getByText('Scan for Bluetooth Devices');
   fireEvent.press(scanButton);
-
-  // Wait for the mock device to be displayed
+  
+  // Wait for the device to be displayed
   await waitFor(() => getByText('Found Device: MockDevice'));
 
   // Simulate connecting to the device
-  const connectButton = getByRole('button', { name: 'Connect to Device' });
+  const connectButton = getByText('Connect to Device');
   fireEvent.press(connectButton);
-
-  // Simulate reading data from the connected device
-  const readButton = getByRole('button', { name: 'Read Data from Device' });
+  
+  // Simulate reading data from the device
+  const readButton = getByText('Read Data from Device');
   fireEvent.press(readButton);
-
+  
   // Ensure the mocked data is displayed
-  await waitFor(() => getByText('Data from device: MockedData'));
+  await waitFor(() => getByText('Data from device:'));
   expect(getByText('MockedData')).toBeTruthy();
 });
