@@ -1,11 +1,17 @@
 class BleManager {
     constructor() {
-      // Mock methods as needed
+      // Mock implementation
     }
   
-    scan() {
-      // Mock the scan method
-      return new Promise((resolve) => resolve());
+    startDeviceScan(_, __, callback) {
+      // Simulate finding a device
+      setTimeout(() => {
+        callback(null, { name: 'MyBluetoothDevice', id: 'mock-id' });
+      }, 100); // Simulate a short delay
+    }
+  
+    stopDeviceScan() {
+      // Mock stop device scan
     }
   
     on() {
