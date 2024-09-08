@@ -6,7 +6,7 @@ import NetInfo from '@react-native-community/netinfo';
 import { syncDataToCloud } from '../App/Container/CloudSyncManager';
 
 // Mock BluetoothManager
-jest.mock('../Container/BluetoothManager', () => ({
+jest.mock('../App/Container/BluetooothManager', () => ({
   requestPermissions: jest.fn(() => Promise.resolve(true)),
   scanForDevices: jest.fn(() => Promise.resolve({ name: 'MockDevice' })),
   connectToDevice: jest.fn(() => Promise.resolve()),
