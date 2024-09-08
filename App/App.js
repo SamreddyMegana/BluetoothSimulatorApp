@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, Alert } from 'react-native';
-import bluetoothManager from '../App/Container/BluetoothManager';
+import bluetoothManager from './Container/BluetooothManager';
 import NetInfo from '@react-native-community/netinfo';
-import { syncDataToCloud } from '../App/Container/CloudSyncManager';
+import { syncDataToCloud } from './Container/CloudSyncManager';
 
 const App = () => {
   const [device, setDevice] = useState(null);
