@@ -1,17 +1,28 @@
-/**
- * @format
- */
-
-import 'react-native';
+// __tests__/App.test.js
 import React from 'react';
+import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import App from '../App/App';
+import BluetoothManager from "../_mocks_/BlutoothManager"; // This will automatically use the mock
 
-// Note: import explicitly to use the types shipped with jest.
-import {it} from '@jest/globals';
+test('App reads and displays Bluetooth data', async () => {
+  const { getByText, getByRole } = render(<App />);
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+  // Simulate the user scanning for devices
+  const scanButton = getByRole('button', { name: 'Scan for Bluetooth Devices' });
+  fireEvent.press(scanButton);
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+  // Wait for the mock device to be displayed
+  await waitFor(() => getByText('Found Device: MockDevice'));
+
+  // Simulate connecting to the device
+  const connectButton = getByRole('button', { name: 'Connect to Device' });
+  fireEvent.press(connectButton);
+
+  // Simulate reading data from the connected device
+  const readButton = getByRole('button', { name: 'Read Data from Device' });
+  fireEvent.press(readButton);
+
+  // Ensure the mocked data is displayed
+  await waitFor(() => getByText('Data from device: MockedData'));
+  expect(getByText('MockedData')).toBeTruthy();
 });
