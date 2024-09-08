@@ -11,6 +11,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
   moduleNameMapper: {
     '^@react-native-async-storage/async-storage$': '<rootDir>/_mocks_/@react-native-async-storage/async-storage.js',
+    '^react-native-ble-plx$': '<rootDir>/_mocks_/react-native-ble-plx.js',
   },
   moduleDirectories: ['node_modules', 'src'], 
 };
