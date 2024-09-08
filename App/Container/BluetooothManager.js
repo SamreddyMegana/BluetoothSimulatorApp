@@ -39,7 +39,7 @@ class BluetoothManager {
         console.log('Found device:', device.name);
 
         // Stop scanning after finding a device
-        if (device && device.name === 'MyBluetoothDevice') {
+        if (device && device.name === 'MockDevice') {
           this.manager.stopDeviceScan();
           resolve(device);
         }
